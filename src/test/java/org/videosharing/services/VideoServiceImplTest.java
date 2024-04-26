@@ -6,6 +6,7 @@ import org.videosharing.domain.VideoModel;
 import org.videosharing.repo.VideoRepo;
 
 import java.io.IOException;
+import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -17,7 +18,7 @@ class VideoServiceImplTest {
 
     @Test
     void getVideo() {
-        VideoModel expected = new VideoModel(testName, null);
+        VideoModel expected = new VideoModel(testName, null, Instant.now());
         // When our VideoService object calls repo.findByName(testName), return expected
         when(repo.findByName(testName))
                 .thenReturn(expected);
@@ -44,7 +45,7 @@ class VideoServiceImplTest {
     @Test
     void saveVideo() throws IOException {
         MultipartFile file = mock(MultipartFile.class);
-        VideoModel testVid = new VideoModel(testName, file.getBytes());
+        VideoModel testVid = new VideoModel(testName, file.getBytes(), Instant.now());
         service.saveVideo(file, testName);
         verify(repo, times(1)).existsByName(testName);
         verify(repo, times(1)).save(testVid);

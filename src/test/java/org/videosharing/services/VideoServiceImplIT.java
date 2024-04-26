@@ -9,6 +9,7 @@ import org.videosharing.repo.VideoRepo;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -27,7 +28,7 @@ public class VideoServiceImplIT {
 
     @Test
     void getVideo() {
-        VideoModel expected = new VideoModel(testName, null);
+        VideoModel expected = new VideoModel(testName, null, Instant.now());
         repo.save(expected);
         VideoModel actual = service.getVideo(testName);
         // The result from service.getVideo(testName) should be expected Video instance above

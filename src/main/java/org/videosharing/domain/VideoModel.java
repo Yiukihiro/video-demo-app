@@ -4,6 +4,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 @Entity
 @Data
@@ -19,14 +23,17 @@ public class VideoModel {
     @Column(unique = true)
     private String name;
 
+    @Column(name = "create_date")
+    private Instant createDate;
+
     //todo probably should have been written on disk, saved link to the file here, check out postgresql docs if saving big files is alright for db
     @Lob
     private byte[] data;
 
     //todo replace with lombok builder
-    public VideoModel(String name, byte[] data) {
+    public VideoModel(String name, byte[] data, Instant createDate) {
         this.name = name;
         this.data = data;
+        this.createDate = createDate;
     }
-    //todo create date required for sorting
 }
