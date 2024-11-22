@@ -19,6 +19,7 @@ public class VideoModel {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "videos_generator")
     @SequenceGenerator(name = "videos_generator", sequenceName = "s_videos", allocationSize = 1)
     private Long id;
+    private int likes;
 
     @Column(unique = true)
     private String name;
@@ -31,9 +32,10 @@ public class VideoModel {
     private byte[] data;
 
     //todo replace with lombok builder
-    public VideoModel(String name, byte[] data, Instant createDate) {
+    public VideoModel(String name, byte[] data, Instant createDate, int likes) {
         this.name = name;
         this.data = data;
         this.createDate = createDate;
+        this.likes = likes;
     }
 }

@@ -1,4 +1,5 @@
 const form = document.querySelector('#video-form');
+const formLikes = document.querySelector('#video-likes');
 const videoDiv = document.querySelector('#video-player');
 const videoScreen = document.querySelector('#video-screen');
 
@@ -13,7 +14,7 @@ fetch('http://localhost/video')
             for(let vid of result){
                 const li = document.createElement('LI');
                 const link = document.createElement('A');
-                link.innerText = vid.name;
+                link.innerText = vid.name + " " + vid.likes;
                 link.href = window.location.origin + window.location.pathname + '?video=' + vid.name;
                 li.appendChild(link);
                 myVids.appendChild(li);
@@ -26,7 +27,7 @@ fetch('http://localhost/video')
 
 if(queryParams.video){
 
-    videoScreen.src = `http://localhost/video/${queryParams.video}`;
+    videoScreen.src = `http://localhost/video/data/${queryParams.video}`;
     videoDiv.style.display = 'block';
     document.querySelector('#now-playing')
         .innerText = 'Now playing ' + queryParams.video;
@@ -37,6 +38,18 @@ form.addEventListener('submit', ev => {
     ev.preventDefault();
     let data = new FormData(form);
     fetch('http://localhost/video', {
+        method: 'POST',
+        body: data
+    }).then(result => result.text()).then(_ => {
+        window.location.reload();
+    });
+
+});
+
+formLikes.addEventListener('submit', ev => {
+    ev.preventDefault();
+    let data = new FormData(formLikes);
+    fetch('http://localhost/video/likes/' + queryParams.video, {
         method: 'POST',
         body: data
     }).then(result => result.text()).then(_ => {

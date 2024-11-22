@@ -32,7 +32,7 @@ public class VideoController {
     }
 
     // {name} is a path variable in the url. It is extracted as the String parameter annotated with @PathVariable
-    @GetMapping("/{name}")
+    @GetMapping("data/{name}")
     public ResponseEntity<Resource> getVideoByName(@PathVariable("name") String name) {
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -41,6 +41,7 @@ public class VideoController {
 
     }
 
+
     @GetMapping()
     //todo replace response entity with dto instead of domain db object
     public ResponseEntity<List<VideoInfoDto>> getAllVideoNames() {
@@ -48,6 +49,12 @@ public class VideoController {
         return ResponseEntity
                 .ok(videoService.getAllVideoNames());
 
+    }
+
+    @PostMapping("likes/{name}")
+    public ResponseEntity<Void> likes(@PathVariable("name") String name) throws IOException {
+        videoService.addLikes(name);
+        return ResponseEntity.ok().build();
     }
 
 }

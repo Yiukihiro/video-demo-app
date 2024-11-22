@@ -23,7 +23,16 @@
                 <h3 id="now-playing"></h3>
             </header>
             <video id="video-screen" width="720px" height="480px" controls></video>
+
+            <form id="video-likes">
+                <button type="submit">Like</button>
+            </form>
+
         </div>
+
+
+
+
         <form id="video-form">
             <fieldset>
                 <legend>Upload a video</legend>
@@ -34,6 +43,9 @@
                 <button type="submit">Save</button>
             </fieldset>
         </form>
+
+
+
     </main>
     <script src="../js/main.js"></script>
 </body>

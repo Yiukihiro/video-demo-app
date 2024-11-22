@@ -11,7 +11,6 @@ public class VideoSharingDemoApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(VideoSharingDemoApplication.class, args);
-
     }
 
     @Bean

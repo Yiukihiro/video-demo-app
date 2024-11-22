@@ -36,10 +36,22 @@ public class VideoServiceImpl implements VideoService {
         List<VideoModel> list = repo.getAllEntryNames();
         list.sort((video1, video2) -> video2.getCreateDate().compareTo(video1.getCreateDate()));
         return list.stream().map(v -> VideoInfoDto.builder()
-                .id(v.getId())
-                .name(v.getName())
-                .build())
+                        .id(v.getId())
+                        .name(v.getName())
+                        .likes(v.getLikes())
+                        .build())
                 .toList();
+    }
+
+    @Override
+    @Transactional
+    public void addLikes(String name){
+        if (!repo.existsByName(name)) {
+            throw new VideoNotFoundException();
+        }
+        VideoModel likeVideo = repo.findByName(name);
+        likeVideo.setLikes(likeVideo.getLikes() + 1);
+        repo.save(likeVideo);
     }
 
     @Override
@@ -48,7 +60,7 @@ public class VideoServiceImpl implements VideoService {
         if (repo.existsByName(name)) {
             throw new VideoAlreadyExistsException();
         }
-        VideoModel newVid = new VideoModel(name, file.getBytes(), Instant.now());
+        VideoModel newVid = new VideoModel(name, file.getBytes(), Instant.now(), 0);
         repo.save(newVid);
     }
 

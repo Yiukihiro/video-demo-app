@@ -11,6 +11,6 @@ public interface VideoService {
     VideoModel getVideo(String name);
 
     void saveVideo(MultipartFile file, String name) throws IOException;
-
+    void addLikes(String name);
     List<VideoInfoDto> getAllVideoNames();
 }
