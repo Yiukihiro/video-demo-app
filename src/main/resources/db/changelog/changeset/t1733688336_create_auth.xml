@@ -1,0 +1,20 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="t1733688336_create_auth" author="V.Butenko">
+        <createTable tableName="auth">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="login" type="text">
+                <constraints unique="true" nullable="false" />
+            </column>
+            <column name="password" type="text">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <createSequence sequenceName="s_auth"
+                        incrementBy="1"
+                        startValue="1"/>
+    </changeSet>
+</databaseChangeLog>

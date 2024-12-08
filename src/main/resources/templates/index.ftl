@@ -5,12 +5,14 @@
     <title>Tube</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styles.css">
+
 </head>
 <body>
     <header>
         <h1>Tube</h1>
     </header>
     <main>
+
         <div id="video-list">
             <header>
                 <h3>Your videos</h3>

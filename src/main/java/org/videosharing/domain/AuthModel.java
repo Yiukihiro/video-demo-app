@@ -12,11 +12,12 @@ import java.time.Instant;
 
 @Table(name = "auth")
 public class AuthModel {
+    @Id
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "auth_generator")
+    @SequenceGenerator(name = "auth_generator", sequenceName = "s_auth", allocationSize = 1)
+    private Long id;
     private String login;
     private String password;
-    @Id
-    @GeneratedValue
-    private Long id;
 
 
 }
