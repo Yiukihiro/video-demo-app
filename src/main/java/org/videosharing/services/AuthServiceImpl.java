@@ -1,7 +1,6 @@
 package org.videosharing.services;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.videosharing.domain.AuthModel;

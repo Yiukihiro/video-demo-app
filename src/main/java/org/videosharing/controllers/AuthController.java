@@ -3,7 +3,6 @@ package org.videosharing.controllers;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.videosharing.domain.AuthModel;
 import org.videosharing.services.AuthService;
 
 import java.io.IOException;
