@@ -20,6 +20,19 @@ public class AuthServiceImpl implements AuthService {
         }
         return "Access denied";
     }
+
+    @Override
+    @Transactional
+    public String createUser(String login, String password) {
+        if (repo.findByLogin(login) != null ) {
+            return "User already exists";
+        }
+        AuthModel createdUser = new AuthModel();
+        createdUser.setLogin(login);
+        createdUser.setPassword(password);
+        repo.save(createdUser);
+        return "User created";
+    }
 }
 
 
