@@ -6,21 +6,23 @@ import org.springframework.transaction.annotation.Transactional;
 import org.videosharing.domain.AuthModel;
 import org.videosharing.domain.UserModel;
 import org.videosharing.repo.AuthRepo;
+import org.videosharing.repo.UsersRepo;
 
 @Service
 @AllArgsConstructor
 public class CreateUserServiceImpl implements CreateUserService {
-    private AuthRepo repo;
+    private UsersRepo repoU;
 
     @Override
     @Transactional
     public String createUser(String login, String password) {
-        UserModel userModel = new UserModel(login, password);
-        if (userModel.equals(repo.findByLogin(login))) {
-            //todo create db acc ~ can't
-            return "Account has been Created";
+        if (repoU.findByLogin(login)) {
+            return "User already exists";
         }
-        //todo new form for login
-        return "Login has duplicate";
+        UserModel createdUser = new UserModel();
+        createdUser.setLogin(login);
+        createdUser.setPassword(password);
+        repoU.save(createdUser);
+        return "User created";
     }
 }
